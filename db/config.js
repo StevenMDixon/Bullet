@@ -11,4 +11,6 @@ const database = process.env.JAWSDB_URL
       port: 3306
 });
 
+database.sync({ force: false });
+
 module.exports = database;
