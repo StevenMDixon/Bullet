@@ -29,5 +29,9 @@ Journal.init(
     modelName: 'Journal'
   }
 );
+Journal.associate = models => {
+  Journal.hasOne(models.User);
+}
+
 
 module.exports = Journal;

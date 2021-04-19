@@ -50,4 +50,8 @@ User.init(
   }
 );
 
+User.associate = models => {
+  User.hasMany(models.Journal);
+}
+
 module.exports = User;

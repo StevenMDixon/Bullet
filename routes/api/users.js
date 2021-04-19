@@ -1,9 +1,20 @@
 const userController = require('../../controllers/users')
 const router = require('express').Router();
 
+// Route to grab all users from the database
 router.get('/', async (req, res)=> {
-    console.log(req)
-    const user = await userController.getUser('1');
+    const users = await userController.getAllUsers();
+    if(users){
+        res.json(users);
+    } else {
+        res.sendStatus(400);
+    }
+})
+
+// Route for specific users
+router.get('/:id', async (req, res)=> {
+    const {id} = req.params;
+    const user = await userController.getUser(id);
     if(user){
         res.sendStatus(200)
     } else {
@@ -11,10 +22,11 @@ router.get('/', async (req, res)=> {
     }
 })
 
+// Route to create users
 router.post('/', async (req, res)=> {
     const {body} = req;
     console.log(body)
-    userController.createUser();
+    //userController.createUser();
     res.sendStatus(200)
 })
 
