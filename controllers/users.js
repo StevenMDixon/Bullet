@@ -15,13 +15,22 @@ exports.getUserByName = async (userName) =>{
 }
 
 exports.getAllUsers = async () =>{
-    const user = await userModel.findOne({
-        where: {}
-    })
+    const user = await userModel.findAll()
     console.log(user)
     return user;
 }
 
-exports.createUser = async (userName, Password) =>{
-  
+exports.createUser = async (userName, password) =>{
+    let user = null;
+    console.log(userName, password)
+    try {
+        user = await userModel.create({
+            username: userName,
+            password: password
+        })
+    } catch {
+        user = null;
+    }
+
+    return user;
 }

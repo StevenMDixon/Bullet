@@ -30,7 +30,7 @@ Journal.init(
   }
 );
 Journal.associate = models => {
-  Journal.hasOne(models.User);
+  Journal.belongsTo(models.User);
 }
 
 

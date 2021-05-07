@@ -25,8 +25,11 @@ router.get('/:id', async (req, res)=> {
 // Route to create users
 router.post('/', async (req, res)=> {
     const {body} = req;
-    console.log(body)
-    //userController.createUser();
+    const user = userController.createUser(body.userName, body.password);
+    console.log(user)
+    if(!user){
+       return res.sendStatus(400);
+    }
     res.sendStatus(200)
 })
 

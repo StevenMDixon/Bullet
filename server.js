@@ -24,9 +24,8 @@ if(process.env.NODE_ENV === "production"){
     });
 }
 
+// Routes are broken out in route folder
 app.use(routes);
-
-
 
 // Start the server
 const server = app.listen(PORT, function() {

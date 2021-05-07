@@ -1,19 +1,39 @@
 const router = require('express').Router();
-const User = require('../../models/users');
+const userController = require('../../controllers/users');
+
 
 router.post('/login', async (req, res) =>{
-    const {username} = req.body;
-    const user = await User.getUserByName(username);
-    if(user){
-        // handle login logic
-        console.log(user)
-    }else{
-        res.send(400);
+    const {userName, password} = req.body;
+    const user = await userController.getUserByName(userName);
+    if(!user){
+        res.sendStatus(400);
     }
+
+    const validPassword = user.checkPassword(password);
+
+    if (!validPassword) {
+      res.sendStatus(400).json({ message: 'Incorrect password!' });
+      return;
+    }
+
+    req.session.save(() => {
+      req.session.userId = user.id;
+      req.session.username = user.userName;
+      req.session.loggedIn = true;
+  
+      res.json({ user: user, message: 'You are now logged in!' });
+    });
 });
 
-router.post('/logout', async (req, res) =>{
-
+router.get('/logout', async (req, res) =>{
+    if (req.session.loggedIn) {
+        req.session.destroy(() => {
+          res.status(204).end();
+        });
+    }
+    else {
+    res.status(404).end();
+    }
 });
 
 
