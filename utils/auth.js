@@ -1,10 +1,10 @@
-const withAuth = (req, res, next) => {
-    console.log(req)
+const requireAuth = (req, res, next) => {
     if (!req.session.userId) {
-      res.redirect("/login");
+      //res.redirect("/login");
+      res.sendStatus(403);
     } else {
       next();
     }
   };
   
-module.exports = withAuth;
+module.exports = requireAuth;

@@ -45,13 +45,8 @@ User.init(
     sequelize,
     timestamps: false,
     freezeTableName: true,
-    underscored: true,
     modelName: 'User'
   }
 );
-
-User.associate = models => {
-  User.hasMany(models.Journal);
-}
 
 module.exports = User;

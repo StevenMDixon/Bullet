@@ -1,12 +1,9 @@
 const express = require("express");
 const session = require('express-session');
-
 const routes = require("./routes");
-
 
 const app = express();
 const PORT = process.env.PORT || 3001; 
-
 
 //app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(session({ secret: '23orj2o!4434~#@W', resave: true, saveUninitialized: true }));

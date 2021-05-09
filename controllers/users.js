@@ -1,4 +1,4 @@
-const userModel = require('../models/users')
+const {userModel, journalModel} = require('../models');
 
 exports.getUser = async (userID) =>{
     const user = await userModel.findOne({
@@ -9,8 +9,8 @@ exports.getUser = async (userID) =>{
 
 exports.getUserByName = async (userName) =>{
     const user = await userModel.findOne({
-        where: {username: userName}
-    })
+        where: {username: userName},
+    },)
     return user;
 }
 

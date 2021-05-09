@@ -25,13 +25,8 @@ Journal.init(
     sequelize,
     timestamps: false,
     freezeTableName: true,
-    underscored: true,
     modelName: 'Journal'
   }
 );
-Journal.associate = models => {
-  Journal.belongsTo(models.User);
-}
-
 
 module.exports = Journal;
